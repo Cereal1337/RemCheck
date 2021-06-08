@@ -1,0 +1,13 @@
+Create menu for what to do if check in doesn't happen
+
+Create check-in
+
+Create send tweet option
+
+Create Custom Program option
+
+Create End Swtich button
+
+Make mobile app
+
+Make the UI look better
