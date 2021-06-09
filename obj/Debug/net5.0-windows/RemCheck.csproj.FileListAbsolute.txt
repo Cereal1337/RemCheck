@@ -5,7 +5,6 @@ C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCh
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCheck.dll
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\ref\RemCheck.dll
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCheck.pdb
-C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.csprojAssemblyReference.cache
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.Form1.resources
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.csproj.GenerateResource.cache
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.GeneratedMSBuildEditorConfig.editorconfig
@@ -16,3 +15,4 @@ C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCh
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\ref\RemCheck.dll
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.pdb
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.genruntimeconfig.cache
+C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.csproj.AssemblyReference.cache

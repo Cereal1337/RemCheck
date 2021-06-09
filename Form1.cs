@@ -19,9 +19,11 @@ namespace RemCheck
             public static string text;
             public static string executionType;
             public static string mins;
+            public static string originalMins;
             public static string hours;
             public static bool run;
             public static string space;
+            public static bool checkIn;
 
             // selectorState is the selector box
             // minsState is the box where you input minutes
@@ -50,6 +52,7 @@ namespace RemCheck
         public void textBox2_TextChanged(object sender, EventArgs e)
         {
             globalVariables.mins = minsState.Text;
+            globalVariables.originalMins = minsState.Text;
         }
 
         private void abortButton_Click(object sender, EventArgs e)
@@ -58,7 +61,7 @@ namespace RemCheck
             globalVariables.hours = "0";
             globalVariables.mins = "0";
             minsState.Text = "";
-            timerBox.Text = "00:00";
+            timerBox.Text = string.Empty;
             minsState.Show();
             runButton.Show();
         }
@@ -69,51 +72,53 @@ namespace RemCheck
             Thread minsToHours = new Thread(new ThreadStart(conversion));
 
             globalVariables.run = true;
-            try
-            {
-                minsToHours.Start();
-            }
-            catch (System.ArgumentNullException)
-            {
-                errorMessage.Text = "Enter a number.";
-                globalVariables.run = false;
-            }
-            catch (System.FormatException)
-            {
-                errorMessage.Text = "Enter a number without a decimal";
-                globalVariables.run = false;
-            }
+            globalVariables.checkIn = false;
+
+            minsToHours.Start();
         }
-        
+
+        private void checkIn_Click(object sender, EventArgs e)
+        {
+            globalVariables.checkIn = true;
+        }
+
         private void conversion()
         {
             Thread executionTimer = new Thread(new ThreadStart(timer));
 
-            if (globalVariables.run == true)
+            try
             {
-                double minsToDouble = double.Parse(globalVariables.mins); // converts minutes to double
-
-                
-                minsState.Invoke((MethodInvoker)(() => minsState.Hide()));
-                runButton.Invoke((MethodInvoker)(() => runButton.Hide()));
-
-                if (minsToDouble % 60 == 0) // if the mins go into 60 with no remainder
+                if (globalVariables.run == true)
                 {
-                    string hoursCalculation = $"{minsToDouble} / 60";
-                    string hours = new DataTable().Compute(hoursCalculation, null).ToString(); // calculates line above
-                    globalVariables.hours = hours;
-                }
-                else
-                {
-                    double doubleHours = minsToDouble / 60;
-                    doubleHours = Math.Floor(doubleHours); //removes decimals
-                    globalVariables.hours = doubleHours.ToString();
-                }
+                    double minsToDouble = double.Parse(globalVariables.mins); // converts minutes to double
 
-                int remainderFromHours = Int32.Parse(globalVariables.mins) % 60;
-                globalVariables.mins = remainderFromHours.ToString();
-                executionTimer.Start();
+
+                    minsState.Invoke((MethodInvoker)(() => minsState.Hide()));
+                    runButton.Invoke((MethodInvoker)(() => runButton.Hide()));
+
+                    if (minsToDouble % 60 == 0) // if the mins go into 60 with no remainder
+                    {
+                        string hoursCalculation = $"{minsToDouble} / 60";
+                        string hours = new DataTable().Compute(hoursCalculation, null).ToString(); // calculates line above
+                        globalVariables.hours = hours;
+                    }
+                    else
+                    {
+                        double doubleHours = minsToDouble / 60;
+                        doubleHours = Math.Floor(doubleHours); //removes decimals
+                        globalVariables.hours = doubleHours.ToString();
+                    }
+
+                    int remainderFromHours = Int32.Parse(globalVariables.mins) % 60;
+                    globalVariables.mins = remainderFromHours.ToString();
+                    executionTimer.Start();
+                }
             }
+            catch
+            {
+                MessageBox.Show("Check you have entered your time in minutes using only numbers without decimals", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void timer()
@@ -136,39 +141,48 @@ namespace RemCheck
             {   
                 while (globalVariables.run == true)
                 {
-                    if (Int32.Parse(globalVariables.hours) == 0 && Int32.Parse(globalVariables.mins) == 0)
+                    try
                     {
-                        globalVariables.text = "END";
-                        timerBox.Invoke((MethodInvoker)(() => timerBox.Text = globalVariables.text)); // avoids cross thread execution error
-                    }
+                        if (Int32.Parse(globalVariables.hours) == 0 && Int32.Parse(globalVariables.mins) == 0 && globalVariables.checkIn == false)
+                        {
+                            globalVariables.text = "END";
+                             // avoids cross thread execution error
+                            Thread executionEvent = new Thread(new ThreadStart(execution));
+                            executionEvent.Start();
+                        }
 
-                    if (Int32.Parse(globalVariables.hours) <= 0)
-                    {
-                        globalVariables.hours = "59";
-                        globalVariables.mins = "59";
-                        delayTime = 1000;
-                    }
+                        if (Int32.Parse(globalVariables.hours) < -1)
+                        {
+                            globalVariables.hours = "59";
+                            globalVariables.mins = "59";
+                            delayTime = 1000;
+                        }
 
-                    Thread.Sleep(delayTime);
-                    int mins;
-                    mins = Int32.Parse(globalVariables.mins) - 1; // update text, could be optimised
-                    globalVariables.mins = mins.ToString();
+                        Thread.Sleep(delayTime);
+                        int mins;
+                        mins = Int32.Parse(globalVariables.mins) - 1; // update text, could be optimised
+                        globalVariables.mins = mins.ToString();
 
-                    if (Int32.Parse(globalVariables.mins) < 0)
-                    {
-                        globalVariables.mins = "59";
-                        int hours;
-                        hours = Int32.Parse(globalVariables.hours) - 1;
-                        globalVariables.hours = hours.ToString();
-                    }
+                        if (Int32.Parse(globalVariables.mins) < 0)
+                        {
+                            globalVariables.mins = "59";
+                            int hours;
+                            hours = Int32.Parse(globalVariables.hours) - 1;
+                            globalVariables.hours = hours.ToString();
+                        }
 
-                    if (Int32.Parse(globalVariables.mins) < 10)
-                    {
-                        globalVariables.space = "0";
+                        if (Int32.Parse(globalVariables.mins) < 10)
+                        {
+                            globalVariables.space = "0";
+                        }
+                        else
+                        {
+                            globalVariables.space = "";
+                        }
                     }
-                    else
+                    catch
                     {
-                        globalVariables.space = "";
+
                     }
                     break;
                 }
@@ -176,9 +190,12 @@ namespace RemCheck
                 globalVariables.text = $"{globalVariables.hours}:{globalVariables.space}{globalVariables.mins}";
                 timerBox.Invoke((MethodInvoker)(() => timerBox.Text = globalVariables.text)); // avoids cross thread execution error
 
-            }
+            } 
+        }
 
-            
+        private void execution()
+        {
+            timerBox.Invoke((MethodInvoker)(() => timerBox.Text = globalVariables.text));
         }
     }   
 }

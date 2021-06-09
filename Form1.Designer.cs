@@ -34,7 +34,7 @@ namespace RemCheck
             this.runButton = new System.Windows.Forms.Button();
             this.timerBox = new System.Windows.Forms.TextBox();
             this.abortButton = new System.Windows.Forms.Button();
-            this.errorMessage = new System.Windows.Forms.Label();
+            this.checkIn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // selectorState
@@ -88,21 +88,22 @@ namespace RemCheck
             this.abortButton.UseVisualStyleBackColor = true;
             this.abortButton.Click += new System.EventHandler(this.abortButton_Click);
             // 
-            // errorMessage
+            // checkIn
             // 
-            this.errorMessage.AutoSize = true;
-            this.errorMessage.Location = new System.Drawing.Point(286, 324);
-            this.errorMessage.Name = "errorMessage";
-            this.errorMessage.Size = new System.Drawing.Size(32, 15);
-            this.errorMessage.TabIndex = 10;
-            this.errorMessage.Text = "error";
+            this.checkIn.Location = new System.Drawing.Point(685, 265);
+            this.checkIn.Name = "checkIn";
+            this.checkIn.Size = new System.Drawing.Size(75, 23);
+            this.checkIn.TabIndex = 10;
+            this.checkIn.Text = "Check In";
+            this.checkIn.UseVisualStyleBackColor = true;
+            this.checkIn.Click += new System.EventHandler(this.checkIn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 684);
-            this.Controls.Add(this.errorMessage);
+            this.Controls.Add(this.checkIn);
             this.Controls.Add(this.abortButton);
             this.Controls.Add(this.timerBox);
             this.Controls.Add(this.runButton);
@@ -125,7 +126,7 @@ namespace RemCheck
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.TextBox timerBox;
         private System.Windows.Forms.Button abortButton;
-        private System.Windows.Forms.Label errorMessage;
+        private System.Windows.Forms.Button checkIn;
     }
 }
 

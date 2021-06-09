@@ -6,8 +6,6 @@ Create send tweet option
 
 Create Custom Program option
 
-Create End Swtich button
-
 Make mobile app
 
 Make the UI look better
