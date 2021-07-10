@@ -30,19 +30,14 @@ namespace RemCheck
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.selectorState = new System.Windows.Forms.ComboBox();
             this.minsState = new System.Windows.Forms.TextBox();
             this.runButton = new System.Windows.Forms.Button();
             this.timerBox = new System.Windows.Forms.TextBox();
             this.abortButton = new System.Windows.Forms.Button();
             this.checkIn = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // selectorState
             // 
@@ -104,6 +99,11 @@ namespace RemCheck
             this.checkIn.Text = "Check In";
             this.checkIn.UseVisualStyleBackColor = true;
             this.checkIn.Click += new System.EventHandler(this.checkIn_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 

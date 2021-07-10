@@ -38,8 +38,6 @@ namespace RemCheck
         {
             InitializeComponent();
             timer1.Interval = 10;
-            Thread executionEvent = new Thread(new ThreadStart(execution));
-            executionEvent.Start();
             globalVariables.takeAway = 0;
         }
 
@@ -65,6 +63,15 @@ namespace RemCheck
 
         public void runButton_Click(object sender, EventArgs e)
         {
+            if (selectorState.Text == "Custom Program")
+            {
+                OpenFileDialog openFile = new OpenFileDialog();
+                openFile.Filter = "Executable Files (*.exe)";
+                if (openFile.ShowDialog() == DialogResult.OK)
+                {
+
+                }
+            }
 
             Thread minsToHours = new Thread(new ThreadStart(conversion));
             globalVariables.run = true;
@@ -148,18 +155,7 @@ namespace RemCheck
         
         private void execution()
         {
-            while (true)
-            {
-                if (selectorState.Text == "Custom Program")
-                {
-                    OpenFileDialog openFile = new OpenFileDialog();
-                    openFile.Filter = "Executable Files (*.exe)";
-                    if (openFile.ShowDialog() == DialogResult.OK)
-                    {
-
-                    }
-                }
-            }
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -176,6 +172,9 @@ namespace RemCheck
                             if (globalVariables.checkIn == false)
                             {
                                 globalVariables.run = false;
+
+                                Thread executionEvent = new Thread(new ThreadStart(execution));
+                                executionEvent.Start();
                             }
                         }
 
