@@ -29,6 +29,8 @@ namespace RemCheck
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.selectorState = new System.Windows.Forms.ComboBox();
             this.minsState = new System.Windows.Forms.TextBox();
             this.runButton = new System.Windows.Forms.Button();
@@ -36,6 +38,11 @@ namespace RemCheck
             this.abortButton = new System.Windows.Forms.Button();
             this.checkIn = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // selectorState
             // 
@@ -127,6 +134,7 @@ namespace RemCheck
         private System.Windows.Forms.TextBox timerBox;
         private System.Windows.Forms.Button abortButton;
         private System.Windows.Forms.Button checkIn;
+        public System.Windows.Forms.Timer timer1;
     }
 }
 
