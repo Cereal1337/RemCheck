@@ -1,19 +1,5 @@
-Create menu for what to do if check in doesn't happen
-
-Create check-in
-
 Create send tweet option
-
-Create Custom Program option
 
 Make mobile app
 
 Make the UI look better
-
-
-
-
-make sure number is counting down from over 
-59 59
-
-if number was under 60 to begin with convert to mins and seconds

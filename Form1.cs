@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,9 +19,9 @@ namespace RemCheck
         {
             public static string text;
             public static string executionType;
+            public static string executionPath;
             public static string mins;
             public static string originalMins;
-            public static int takeAway;
             public static string hours;
             public static bool secondMode = false;
             public static bool run;
@@ -37,8 +38,6 @@ namespace RemCheck
         public Form1()
         {
             InitializeComponent();
-            timer1.Interval = 10;
-            globalVariables.takeAway = 0;
         }
 
 
@@ -56,28 +55,60 @@ namespace RemCheck
             globalVariables.mins = "0";
             minsState.Text = "";
             timerBox.Text = string.Empty;
+
+            ovveride.Hide();
+            checkIn.Hide();
+            abortButton.Hide();
             minsState.Show();
             runButton.Show();
         }
 
-
         public void runButton_Click(object sender, EventArgs e)
         {
+            void run()
+            {
+                Thread minsToHours = new Thread(new ThreadStart(conversion));
+                globalVariables.run = true;
+                globalVariables.checkIn = false;
+                timer1.Interval = 1000;
+                minsToHours.Start();
+            }
+
+            if (selectorState.Text == "")
+            {
+                globalVariables.run = false;
+                globalVariables.hours = "0";
+                globalVariables.mins = "0";
+                minsState.Text = "";
+                timerBox.Text = string.Empty;
+
+                ovveride.Hide();
+                checkIn.Hide();
+                abortButton.Hide();
+                minsState.Show();
+                runButton.Show();
+
+                MessageBox.Show("Select an Execution Type", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             if (selectorState.Text == "Custom Program")
             {
                 OpenFileDialog openFile = new OpenFileDialog();
-                openFile.Filter = "Executable Files (*.exe)";
+                openFile.Filter = "Executable Files (*.exe)|*.exe";
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
-
+                    globalVariables.executionPath = openFile.FileName;
                 }
+                run();
             }
 
-            Thread minsToHours = new Thread(new ThreadStart(conversion));
-            globalVariables.run = true;
-            globalVariables.checkIn = false;
+            ovveride.Invoke((MethodInvoker)(() => ovveride.Show()));
+            checkIn.Invoke((MethodInvoker)(() => checkIn.Show()));
+            abortButton.Invoke((MethodInvoker)(() => abortButton.Show()));
 
-            minsToHours.Start();
+            globalVariables.executionType = selectorState.Text;
+
+            
         }
 
         private void checkIn_Click(object sender, EventArgs e)
@@ -85,6 +116,12 @@ namespace RemCheck
             globalVariables.checkIn = true;
             globalVariables.mins = globalVariables.originalMins;
             conversion();
+        }
+
+        private void ovveride_Click(object sender, EventArgs e)
+        {
+            Thread executionEvent = new Thread(new ThreadStart(execution));
+            executionEvent.Start();
         }
 
         private void conversion()
@@ -131,6 +168,19 @@ namespace RemCheck
             }
             catch
             {
+                ovveride.Invoke((MethodInvoker)(() => ovveride.Hide()));
+                checkIn.Invoke((MethodInvoker)(() => checkIn.Hide()));
+                abortButton.Invoke((MethodInvoker)(() => abortButton.Hide()));
+
+                minsState.Invoke((MethodInvoker)(() => minsState.Show()));
+                runButton.Invoke((MethodInvoker)(() => runButton.Show()));
+
+                globalVariables.run = false;
+                globalVariables.hours = "0";
+                globalVariables.mins = "0";
+                minsState.Text = "";
+                timerBox.Text = string.Empty;
+
                 MessageBox.Show("Check you have entered your time in minutes using only numbers without decimals", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
            
@@ -153,140 +203,151 @@ namespace RemCheck
         }
 
         
+
         private void execution()
         {
-            
+            timer1.Interval = 10000000;
+            timerBox.Invoke((MethodInvoker)(() => timerBox.Text = "00:00"));
+
+            if (globalVariables.executionType == "Custom Program")
+            {
+                Process.Start(globalVariables.executionPath);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
-            if (globalVariables.run == true)
+            try
             {
-                if (Int32.Parse(globalVariables.originalMins) < 60)
+                if (globalVariables.run == true)
                 {
-                    try
+                    if (Int32.Parse(globalVariables.originalMins) < 60)
                     {
-                        if (Int32.Parse(globalVariables.hours) == 0 && Int32.Parse(globalVariables.mins) == 0)
+                        try
                         {
-                            if (globalVariables.checkIn == false)
+                            if (Int32.Parse(globalVariables.hours) == 0 && Int32.Parse(globalVariables.mins) == 0)
                             {
-                                globalVariables.run = false;
+                                if (globalVariables.checkIn == false)
+                                {
+                                    globalVariables.run = false;
 
-                                Thread executionEvent = new Thread(new ThreadStart(execution));
-                                executionEvent.Start();
+                                    Thread executionEvent = new Thread(new ThreadStart(execution));
+                                    executionEvent.Start();
+                                }
                             }
-                        }
 
-                        if (globalVariables.checkIn == true)
-                        {
-                            globalVariables.checkIn = false;
-                            globalVariables.time = false;
-                        }
-
-                        int mins;
-                        mins = Int32.Parse(globalVariables.mins) - 1; // update text, could be optimised
-                        globalVariables.mins = mins.ToString();
-
-
-                        if (Int32.Parse(globalVariables.mins) < 0)
-                        {
-                            globalVariables.mins = "59";
-                            int hours;
-                            hours = Int32.Parse(globalVariables.hours) - 1;
-                            globalVariables.hours = hours.ToString();
-                        }
-
-                        if (Int32.Parse(globalVariables.mins) < 10)
-                        {
-                            globalVariables.space = "0";
-                        }
-                        else
-                        {
-                            globalVariables.space = "";
-                        }
-
-                        timerBox.Invoke((MethodInvoker)(() => timerBox.Text = $"{globalVariables.hours}:{globalVariables.space}{globalVariables.mins}"));
-                    }
-                    catch
-                    {
-
-                    }
-
-                }
-                else
-                {
-                    try
-                    {
-
-
-                        if (globalVariables.secondMode == true)
-                        {
-                            timer1.Interval = 1000;
-                        }
-                        else
-                        {
-                            timer1.Interval = 5000;
-                        }
-
-                        if (Int32.Parse(globalVariables.hours) == 0 && Int32.Parse(globalVariables.mins) == 0)
-                        {
-                            if (globalVariables.checkIn == false)
+                            if (globalVariables.checkIn == true)
                             {
-                                globalVariables.run = false;
-
-                                Thread executionEvent = new Thread(new ThreadStart(execution));
-                                executionEvent.Start();
+                                globalVariables.checkIn = false;
+                                globalVariables.time = false;
                             }
-                        }
 
-                        if (globalVariables.checkIn == true)
+                            int mins;
+                            mins = Int32.Parse(globalVariables.mins) - 1; // update text, could be optimised
+                            globalVariables.mins = mins.ToString();
+
+
+                            if (Int32.Parse(globalVariables.mins) < 0)
+                            {
+                                globalVariables.mins = "59";
+                                int hours;
+                                hours = Int32.Parse(globalVariables.hours) - 1;
+                                globalVariables.hours = hours.ToString();
+                            }
+
+                            if (Int32.Parse(globalVariables.mins) < 10)
+                            {
+                                globalVariables.space = "0";
+                            }
+                            else
+                            {
+                                globalVariables.space = "";
+                            }
+
+                            timerBox.Invoke((MethodInvoker)(() => timerBox.Text = $"{globalVariables.hours}:{globalVariables.space}{globalVariables.mins}"));
+                        }
+                        catch
                         {
-                            globalVariables.checkIn = false;
-                            globalVariables.time = false;
+
                         }
 
-                        if (Int32.Parse(globalVariables.hours) == 0)
-                        {
-
-
-                            globalVariables.hours = "59";
-                            globalVariables.mins = "59";
-                            globalVariables.secondMode = true;
-                        }
-
-
-                        int mins;
-                        mins = Int32.Parse(globalVariables.mins) - 1; // update text, could be optimised
-                        globalVariables.mins = mins.ToString();
-
-
-                        if (Int32.Parse(globalVariables.mins) < 0)
-                        {
-                            globalVariables.mins = "59";
-                            int hours;
-                            hours = Int32.Parse(globalVariables.hours) - 1;
-                            globalVariables.hours = hours.ToString();
-                        }
-
-                        if (Int32.Parse(globalVariables.mins) < 10)
-                        {
-                            globalVariables.space = "0";
-                        }
-                        else
-                        {
-                            globalVariables.space = "";
-                        }
-
-                        timerBox.Invoke((MethodInvoker)(() => timerBox.Text = $"{globalVariables.hours}:{globalVariables.space}{globalVariables.mins}"));
                     }
-                    catch
+                    else
                     {
+                        try
+                        {
 
+
+                            if (globalVariables.secondMode == true)
+                            {
+                                timer1.Interval = 1000;
+                            }
+                            else
+                            {
+                                timer1.Interval = 60000;
+                            }
+
+                            if (Int32.Parse(globalVariables.hours) == 0 && Int32.Parse(globalVariables.mins) == 0)
+                            {
+                                if (globalVariables.checkIn == false)
+                                {
+                                    globalVariables.run = false;
+
+                                    Thread executionEvent = new Thread(new ThreadStart(execution));
+                                    executionEvent.Start();
+                                }
+                            }
+
+                            if (globalVariables.checkIn == true)
+                            {
+                                globalVariables.checkIn = false;
+                                globalVariables.time = false;
+                            }
+
+                            if (Int32.Parse(globalVariables.hours) == 0)
+                            {
+
+
+                                globalVariables.hours = "59";
+                                globalVariables.mins = "59";
+                                globalVariables.secondMode = true;
+                            }
+
+                            if (Int32.Parse(globalVariables.mins) < 0)
+                            {
+                                globalVariables.mins = "59";
+                                int hours;
+                                hours = Int32.Parse(globalVariables.hours) - 1;
+                                globalVariables.hours = hours.ToString();
+                            }
+
+                            if (Int32.Parse(globalVariables.mins) < 10)
+                            {
+                                globalVariables.space = "0";
+                            }
+                            else
+                            {
+                                globalVariables.space = "";
+                            }
+
+                            timerBox.Invoke((MethodInvoker)(() => timerBox.Text = $"{globalVariables.hours}:{globalVariables.space}{globalVariables.mins}"));
+                            int mins;
+                            mins = Int32.Parse(globalVariables.mins) - 1; // update text, could be optimised
+                            globalVariables.mins = mins.ToString();
+                        }
+                        catch
+                        {
+
+                        }
                     }
                 }
             }
+            catch
+            {
+
+            }
         }
+
     }   
 }
 

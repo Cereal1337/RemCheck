@@ -16,3 +16,4 @@ C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\ref\R
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.pdb
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.genruntimeconfig.cache
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.csproj.AssemblyReference.cache
+C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.Properties.Resources.resources

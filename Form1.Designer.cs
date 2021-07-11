@@ -37,10 +37,12 @@ namespace RemCheck
             this.abortButton = new System.Windows.Forms.Button();
             this.checkIn = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.ovveride = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // selectorState
             // 
+            this.selectorState.BackColor = System.Drawing.SystemColors.Menu;
             this.selectorState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.selectorState.FormattingEnabled = true;
             this.selectorState.Items.AddRange(new object[] {
@@ -54,9 +56,10 @@ namespace RemCheck
             // minsState
             // 
             this.minsState.Location = new System.Drawing.Point(226, 212);
+            this.minsState.MaxLength = 5;
             this.minsState.Name = "minsState";
             this.minsState.Size = new System.Drawing.Size(33, 23);
-            this.minsState.TabIndex = 5;
+            this.minsState.TabIndex = 9999;
             this.minsState.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // runButton
@@ -74,7 +77,7 @@ namespace RemCheck
             this.timerBox.BackColor = System.Drawing.SystemColors.Window;
             this.timerBox.Location = new System.Drawing.Point(403, 212);
             this.timerBox.Name = "timerBox";
-            this.timerBox.PlaceholderText = "00:00:00";
+            this.timerBox.PlaceholderText = "00:00";
             this.timerBox.ReadOnly = true;
             this.timerBox.Size = new System.Drawing.Size(100, 23);
             this.timerBox.TabIndex = 8;
@@ -88,6 +91,7 @@ namespace RemCheck
             this.abortButton.TabIndex = 9;
             this.abortButton.Text = "Abort";
             this.abortButton.UseVisualStyleBackColor = true;
+            this.abortButton.Visible = false;
             this.abortButton.Click += new System.EventHandler(this.abortButton_Click);
             // 
             // checkIn
@@ -98,6 +102,7 @@ namespace RemCheck
             this.checkIn.TabIndex = 10;
             this.checkIn.Text = "Check In";
             this.checkIn.UseVisualStyleBackColor = true;
+            this.checkIn.Visible = false;
             this.checkIn.Click += new System.EventHandler(this.checkIn_Click);
             // 
             // timer1
@@ -105,22 +110,34 @@ namespace RemCheck
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // ovveride
+            // 
+            this.ovveride.Location = new System.Drawing.Point(735, 150);
+            this.ovveride.Name = "ovveride";
+            this.ovveride.Size = new System.Drawing.Size(95, 23);
+            this.ovveride.TabIndex = 10000;
+            this.ovveride.Text = "Override Timer";
+            this.ovveride.UseVisualStyleBackColor = true;
+            this.ovveride.Visible = false;
+            this.ovveride.Click += new System.EventHandler(this.ovveride_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 684);
+            this.Controls.Add(this.ovveride);
             this.Controls.Add(this.checkIn);
             this.Controls.Add(this.abortButton);
             this.Controls.Add(this.timerBox);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.minsState);
             this.Controls.Add(this.selectorState);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "s";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,6 +152,7 @@ namespace RemCheck
         private System.Windows.Forms.Button abortButton;
         private System.Windows.Forms.Button checkIn;
         public System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button ovveride;
     }
 }
 
