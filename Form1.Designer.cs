@@ -30,6 +30,7 @@ namespace RemCheck
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.selectorState = new System.Windows.Forms.ComboBox();
             this.minsState = new System.Windows.Forms.TextBox();
             this.runButton = new System.Windows.Forms.Button();
@@ -135,6 +136,7 @@ namespace RemCheck
             this.Controls.Add(this.selectorState);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";

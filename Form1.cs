@@ -99,12 +99,26 @@ namespace RemCheck
                 {
                     globalVariables.executionPath = openFile.FileName;
                 }
+                ovveride.Invoke((MethodInvoker)(() => ovveride.Show()));
+                checkIn.Invoke((MethodInvoker)(() => checkIn.Show()));
+                abortButton.Invoke((MethodInvoker)(() => abortButton.Show()));
                 run();
             }
+            if (selectorState.Text == "Tweet")
+            {
+                MessageBox.Show("Coming Soon!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                globalVariables.run = false;
+                globalVariables.hours = "0";
+                globalVariables.mins = "0";
+                minsState.Text = "";
+                timerBox.Text = string.Empty;
 
-            ovveride.Invoke((MethodInvoker)(() => ovveride.Show()));
-            checkIn.Invoke((MethodInvoker)(() => checkIn.Show()));
-            abortButton.Invoke((MethodInvoker)(() => abortButton.Show()));
+                ovveride.Hide();
+                checkIn.Hide();
+                abortButton.Hide();
+                minsState.Show();
+                runButton.Show();
+            }
 
             globalVariables.executionType = selectorState.Text;
 

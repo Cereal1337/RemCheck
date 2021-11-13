@@ -17,3 +17,22 @@ C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCh
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.genruntimeconfig.cache
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.csproj.AssemblyReference.cache
 C:\Users\cfren\Desktop\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.Properties.Resources.resources
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCheck.exe
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCheck.deps.json
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCheck.runtimeconfig.json
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCheck.runtimeconfig.dev.json
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCheck.dll
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\ref\RemCheck.dll
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\bin\Debug\net5.0-windows\RemCheck.pdb
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.csproj.AssemblyReference.cache
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.Form1.resources
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.Properties.Resources.resources
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.csproj.GenerateResource.cache
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.AssemblyInfoInputs.cache
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.AssemblyInfo.cs
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.csproj.CoreCompileInputs.cache
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.dll
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\ref\RemCheck.dll
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.pdb
+C:\Users\cfren\Documents\Coding & Linux\C#\Dead Man's Switch\RemCheck\obj\Debug\net5.0-windows\RemCheck.genruntimeconfig.cache
